@@ -14,6 +14,15 @@ public class Contest extends BaseEntity{
     private final User creator;
     private ContestStatus contestStatus;
 
+    public Contest(Contest contest){
+        this(contest.id,contest.name,contest.questions,contest.level,contest.creator,contest.contestStatus);
+    }
+
+    public Contest(String id, String name, List<Question> questions, Level level, User creator,
+            ContestStatus contestStatus) {
+        this(name,questions,level,creator,contestStatus);
+        this.id = id;
+    }
 
     public Contest(String name, List<Question> questions, Level level, User creator,
             ContestStatus contestStatus) {
@@ -33,13 +42,18 @@ public class Contest extends BaseEntity{
 
     private void validateQuestionList(List<Question> qList, Level contestLevel) throws InvalidContestException {
         for (Question question: qList) {
-            if (question.getLevel() != this.level) {
+            if (question.getLevel() != contestLevel) {
                 throw new InvalidContestException("Question level does not match with Contest level");
             }
         }
     }
 
+    // TODO: CRIO_TASK_MODULE_SERVICES
+    // Change the Contest Status to ENDED
 
+    public void endContest(){
+        this.contestStatus = ContestStatus.ENDED;
+    }
     
     public String getName() {
         return name;
