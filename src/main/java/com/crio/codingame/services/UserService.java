@@ -83,23 +83,6 @@ public class UserService implements IUserService {
 
     @Override
     public UserRegistrationDto withdrawContest(String contestId, String userName) throws ContestNotFoundException, UserNotFoundException, InvalidOperationException {
-        // if (!contestRepository.existsById(contestId)) {
-        //     throw new ContestNotFoundException("context not found");
-        // } else if (userRepository.findByName(userName).isPresent()) {
-        //     throw new UserNotFoundException("user not found");
-        // } else if (contestRepository.findById(contestId).get().getContestStatus().equals(ContestStatus.IN_PROGRESS) || 
-        // contestRepository.findById(contestId).get().getContestStatus().equals(ContestStatus.ENDED)) {
-        //     throw new InvalidOperationException("contest either in progress or ended");
-        // } else if (contestRepository.findById(contestId).get().getCreator().getName().equals(userName)) {
-        //     throw new InvalidOperationException("contest creator cannot withdraw");
-        // } else if (userRepository.findByName(userName).get().getContests().stream().filter(c -> c.getId().equals(contestId)).findAny().equals(Optional.empty())) {
-        //     throw new InvalidOperationException("user not registered for contest yet");
-        // } else {
-        //     userRepository.delete(userRepository.findByName(userName).get());
-        // }
-        // return 
-
-
         Contest contest = contestRepository.findById(contestId).orElseThrow(() -> new ContestNotFoundException("Cannot Attend Contest. Contest for given id:"+contestId+" not found!"));
         User user = userRepository.findByName(userName).orElseThrow(() -> new UserNotFoundException("Cannot Attend Contest. User for given name:"+ userName+" not found!"));
         if(contest.getContestStatus().equals(ContestStatus.IN_PROGRESS)){
