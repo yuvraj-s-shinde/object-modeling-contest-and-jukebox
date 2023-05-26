@@ -1,4 +1,4 @@
-package com.crio.codingame.repositories;
+package com.crio.jukebox.repositories;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import com.crio.codingame.entities.User;
+import com.crio.jukebox.entities.User;
 
 public class UserRepository implements IUserRepository{
 
@@ -26,17 +26,13 @@ public class UserRepository implements IUserRepository{
     public User save(User entity) {
         if( entity.getId() == null ){
             autoIncrement++;
-            User u = new User(Integer.toString(autoIncrement),entity.getName(),entity.getScore());
+            User u = new User(Integer.toString(autoIncrement),entity.getName());
             userMap.put(u.getId(),u);
             return u;
         }
         userMap.put(entity.getId(),entity);
         return entity;
     }
-
-    // TODO: CRIO_TASK_MODULE_SERVICES
-    // Find all the list of User Present in the Repository
-    // Tip:- Use Java Streams
 
     @Override
     public List<User> findAll() {
@@ -53,7 +49,7 @@ public class UserRepository implements IUserRepository{
     public boolean existsById(String id) {
         // TODO Auto-generated method stub
         for (Map.Entry<String, User> entry :userMap.entrySet()) {
-            if (entry.getValue().getId() == id)
+            if (entry.getValue().getId().equals(id))
                 return true;
         }
         return false;
@@ -82,10 +78,6 @@ public class UserRepository implements IUserRepository{
         return (long) userMap.size();
     }
 
-    // TODO: CRIO_TASK_MODULE_SERVICES
-    // Find the User Present in the Repository provided name
-    // Tip:- Use Java Streams
-
     @Override
     public Optional<User> findByName(String name) {
         for (Map.Entry<String, User> entry: userMap.entrySet())
@@ -95,6 +87,12 @@ public class UserRepository implements IUserRepository{
             }
         }
         return Optional.empty();
+    }
+
+    @Override
+    public User update(User user) {
+        userMap.put(user.getId(),user);
+        return userMap.get(user.getId());
     }
     
 }

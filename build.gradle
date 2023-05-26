@@ -5,13 +5,19 @@ plugins {
 
 ext {
 	buildId = System.currentTimeMillis()
-	codinGameMainClass = "com.crio.codingame.App"
+	// codinGameMainClass = "com.crio.codingame.App"
+	codinGameMainClass = "com.crio.jukebox.App"
 }
 
 // CRIO_SOLUTION_AND_STUB_START_MODULE_TAKEHOME
 // Replace the mainClass variable with jukeBoxMainClass to only run the JukeBox Application.
 // Revert back to codinGameMainClass to only run the CodingGame Application.
 // CRIO_SOLUTION_AND_STUB_START_MODULE_TAKEHOME
+// 	jukeBoxMainClass = "com.crio.jukebox.App"
+// }
+
+// Replace the mainClass variable with jukeBoxMainClass to only run the JukeBox Application.
+// Revert back to codinGameMainClass to only run the CodingGame Application.
 application {
     mainClass = codinGameMainClass
 }
@@ -26,6 +32,8 @@ repositories {
 }
 
 dependencies {
+	implementation group: 'com.opencsv', name: 'opencsv', version: '4.1'
+	implementation 'com.fasterxml.jackson.core:jackson-databind:2.8.9'
 	testImplementation 'org.mockito:mockito-junit-jupiter:3.11.1'
 	testImplementation 'org.junit.jupiter:junit-jupiter:5.7.2'
 }

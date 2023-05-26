@@ -1,4 +1,3 @@
-
 package com.crio.codingame.entities;
 
 public class Question extends BaseEntity {
@@ -20,7 +19,6 @@ public class Question extends BaseEntity {
         this.level = level;
         this.score = score;
     }
-
 
     @Override
     public int hashCode() {
